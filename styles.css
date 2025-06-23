@@ -1,21 +1,87 @@
 *{
-  margin:0;
-  padding:0;
+    margin:0;
+    padding:0;
+}
+h1{
+    font-family: 'Brush Script MT', cursive;
+    font-size: 4em;
+    color:#241715;
+    text-align: center;
 }
 body{
-  background-color:#957186;
+  background-color:#2F1000;
+  text-align:center;
+}
+.container{
+    height:87vh;
+    display:flex;
+    justify-content:center;
+    align-items: center;
 }
 .game{
   height:60vmin;
-  width:60vmin;
+  width: 60vmin;
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   align-items: center;
   gap:1.5vmin;
 }
-.X1{
+.x1{
   height:18vmin;
-  width:18vmin;
+  width: 18vmin;
+  border-radius:1rem;
+  border:none;
+  box-shadow:0 0 1rem rgba(0,0,0,0.3);
+  font-size: 8vmin;
+  color:#D9B8C4;
+  background-color:#621B00;
+  justify-content: center;
+  align-items: center;
+ 
+}
+#reset{
+    padding:1rem;
+    font-size:1.25rem;
+    background-color:#945600;
+    color:white;
+    border-radius:1rem;
+    border:none;
+}
+#new{
+    padding:1rem;
+    font-size:1.25rem;
+    background-color:#945600;
+    color:white;
+    border-radius:1rem;
+    border:none;
+}
+.msg-container{
+    height:30vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px auto;
+}
+.hidden{
+    display:none;
+}
+#msg{
+   color:#957186;
+   font-size:5vmin;
+
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+#typed-winner {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #000;
+  animation: typing 2s steps(30) forwards;
 }
   
