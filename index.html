@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XOXplore</title>
-    <link rel="stylesheet" href="styles.css"/>
-  </head>
-  <body>
+    <link rel="stylesheet" href="styles.css">
+</head>
+ <body>
+    <div class="msg-container hidden">
+        <p id="msg"><span id="typed-winner"></span></p>
+    </div>
     <main>
-       <h1>XOXplore</h1>
-      <div class="game">
+       <h1><u>XOXplore</u></h1>
+       <div class="container">
+       <div class="game">
         <button class="x1"></button>
         <button class="x1"></button>
         <button class="x1"></button>
@@ -19,7 +23,11 @@
         <button class="x1"></button>
         <button class="x1"></button>
         <button class="x1"></button>     
-      </div>      
-    </main>   
-  </body>  
+      </div>
+      </div>
+      <button id="reset">Reset</button>  
+      <button id="new">New Game</button>            
+    </main>
+    <script src="script.js"></script>   
+  </body> 
 </html>
