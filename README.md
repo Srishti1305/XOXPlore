@@ -15,7 +15,6 @@
 - ✌️ Two-player mode on a 3×3 grid  
 - 🧠 Real-time win and draw detection logic  
 - 🔁 Game reset with a single click  
-- 💡 Visual cues for active player turn  
 - 📱 Responsive design for mobile and desktop  
 
 ---
