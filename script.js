@@ -84,6 +84,10 @@ function checkWinner() {
     let pos3 = boxes[pattern[2]].innerText;
 
     if (pos1 !== "" && pos1 === pos2 && pos2 === pos3) {
+      boxes[pattern[0]].classList.add("win");
+      boxes[pattern[1]].classList.add("win");
+      boxes[pattern[2]].classList.add("win");
+
       showWinner(pos1);
       return true;
     }
@@ -97,6 +101,7 @@ function resetGame() {
   enableBoxes();
   msgContainer.classList.add("hidden");
   typedWinner.innerText = "";
+  boxes.forEach(box => box.classList.remove("win"));
   clearInterval(typingInterval);
 }
 
