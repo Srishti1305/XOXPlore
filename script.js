@@ -1,96 +1,104 @@
-let box=document.querySelectorAll(".x1");
-let reset1=document.querySelector("#reset");
-let newgame= document.querySelector("#new");
-let msgcontainer=document.querySelector(".msg-container");
-let msg=document.querySelector("#msg");
+let boxes = document.querySelectorAll(".x1");
+let resetBtn = document.querySelector("#reset");
+let newBtn = document.querySelector("#new");
+let msgContainer = document.querySelector(".msg-container");
+let typedWinner = document.querySelector("#typed-winner");
 
-let turnO=true;
-let count=0;
-const Wins=[
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6],
+let turnO = true;
+let count = 0;
+let typingInterval;
+
+const winPatterns = [
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [2,4,6],
 ];
-box.forEach((x1) =>{ 
-    x1.addEventListener("click",()=>{
-        if(turnO)
-        {
-            x1.innerText="X";
-            turnO=false;
-        }
-        else{
-            x1.innerText="O";
-            turnO=true;
-        }
-        x1.disabled=true;
-        count++;
-        let isWinner=Winner();
-        if(count===9 && !isWinner)
-        {
-            gameDraw();
-        }
-    });    
-});
-const gameDraw=()=>{
-    msg.innerText=`Game is Draw`;
-    msgcontainer.classList.remove("hidden");
-    disableBoxes();
-};
-const disableBoxes=()=>{
-    for(let b1 of box )
-    {
-        b1.disabled=true;
-    }
-};
-const enableBoxes=()=>{
-    for(let b1 of box )
-    {
-        b1.disabled=false;
-        b1.innerText="";
-    }
-};
-const showWinner = (winner) => {
-  msgcontainer.classList.remove("hidden");
-  const text = `🎉 Congratulations,  ${winner}  wins! 👏😊`;
-  const typedElement = document.getElementById("typed-winner");
-  typedElement.innerText = ""; // Clear previous content
 
+boxes.forEach((box) => {
+  box.addEventListener("click", () => {
+    if (turnO) {
+      box.innerText = "X";
+    } else {
+      box.innerText = "O";
+    }
+
+    turnO = !turnO;
+    box.disabled = true;
+    count++;
+
+    if (checkWinner()) return;
+
+    if (count === 9) {
+      showDraw();
+    }
+  });
+});
+
+function showDraw() {
+  msgContainer.classList.remove("hidden");
+  typedWinner.innerText = "Game is Draw 🤝";
+  disableBoxes();
+}
+
+function disableBoxes() {
+  boxes.forEach(box => box.disabled = true);
+}
+
+function enableBoxes() {
+  boxes.forEach(box => {
+    box.disabled = false;
+    box.innerText = "";
+  });
+}
+
+function showWinner(winner) {
+  msgContainer.classList.remove("hidden");
+
+  const text = `🎉 Congratulations, ${winner} wins! 👏`;
+
+  typedWinner.innerText = "";
   let index = 0;
-  const typingInterval = setInterval(() => {
-    typedElement.innerText += text[index];
+
+  clearInterval(typingInterval);
+
+  typingInterval = setInterval(() => {
+    typedWinner.innerText += text[index];
     index++;
-    if (index === text.length) clearInterval(typingInterval);
-  }, 60); // typing speed in ms
+    if (index === text.length) {
+      clearInterval(typingInterval);
+    }
+  }, 50);
 
   disableBoxes();
-};
-const Winner=() =>{
-    for (let pattern of Wins)
-    {
-        let po1value=box[pattern[0]].innerText;
-        let po2value=box[pattern[1]].innerText;
-        let po3value=box[pattern[2]].innerText;
-        if(po1value !=""&& po2value !=""&& po3value !="")
-        {
-            if(po1value===po2value && po2value===po3value)
-            {
-                showWinner(po1value);
-                return true;
-            }
-        }
+}
 
+function checkWinner() {
+  for (let pattern of winPatterns) {
+    let pos1 = boxes[pattern[0]].innerText;
+    let pos2 = boxes[pattern[1]].innerText;
+    let pos3 = boxes[pattern[2]].innerText;
+
+    if (pos1 !== "" && pos1 === pos2 && pos2 === pos3) {
+      showWinner(pos1);
+      return true;
     }
-};
-const resetgame =() =>{
-    turnO=true;
-    count=0;
-    enableBoxes();
-    msgcontainer.classList.add("hidden");
-};
-newgame.addEventListener("click",resetgame);
-reset1.addEventListener("click",resetgame);
+  }
+  return false;
+}
+
+function resetGame() {
+  turnO = true;
+  count = 0;
+  enableBoxes();
+  msgContainer.classList.add("hidden");
+  typedWinner.innerText = "";
+  clearInterval(typingInterval);
+}
+
+newBtn.addEventListener("click", resetGame);
+resetBtn.addEventListener("click", resetGame);
