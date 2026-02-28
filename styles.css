@@ -8,6 +8,15 @@ h1{
     color:white;
     text-align: center;
 }
+.x1:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
 body{
   background-color:#2F1000;
   text-align:center;
